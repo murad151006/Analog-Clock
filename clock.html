@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Clcok</title>
+
+    <style>
+        html{
+            background-color: #ffc600;
+            font-size: 10px;
+            text-align: center;
+        }
+        body{
+            
+            
+            min-height: 100vh;
+           
+        }
+
+        .clock{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            width: 30rem;
+            height: 30rem;
+            border: 20px solid white;
+            border-radius: 50%;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0 0 0px 4px rgba(0, 0, 0, 0.1),
+            inset 0 0 0 3px #efefef,
+            inset 0 0 10px black;
+            align-items: center;
+            left: 50%;
+            transform: translate(-50%);
+
+        }
+        .clock-face{
+            position: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+        }
+
+        .hand{
+            width: 50%;
+            height: 6px;
+            background: #000;
+            position: absolute;
+            top: 50%;
+            transform: rotate(90deg);
+            transform-origin:100%;
+            transition: all .1s;
+            transition-timing-function: cubic-bezier(0.25, 2.7, 0.58, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="font-size: 40px;">Analog clock</h2>
+
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour"></div>
+            <div class="hand min"></div>
+            <div class="hand sec"></div>
+        </div>
+    </div>
+    
+    <script>
+        //get all selectors
+        const secondsHands = document.querySelector(".sec");
+        const minHands = document.querySelector(".min");
+        const hourHands = document.querySelector(".hour");
+
+
+        // Functions
+        function setDate(){
+
+            // get time
+            const now = new Date();
+
+            const second = now.getSeconds();
+            //console.log(second)
+            const secDeg = ((second/60)*360)+90;
+            //console.log(secDeg)
+            secondsHands.style.transform = `rotate(${secDeg}deg)`;
+
+            const minutes = now.getMinutes();
+            //console.log(minutes)
+            const minutesDeg = ((minutes/60)*360)+90;
+            //console.log(minutesDeg)
+            minHands.style.transform = `rotate(${minutesDeg}deg)`;
+
+            const hours = now.getHours();
+           // console.log(hours)
+            const hoursDeg = ((hours/60)*360)+90;
+           // console.log(hoursDeg)
+            hourHands.style.transform = `rotate(${hoursDeg}deg)`;
+        }
+
+        setInterval(setDate, 1000);
+    </script>
+</body>
+</html>
